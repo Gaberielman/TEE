@@ -11,13 +11,217 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --ink: #f8f5f1;
+            --cream: #fff8f1;
+            --peach: #ffb49a;
+            --pink: #ee7892;
+            --text: #332b30;
+            --muted: #756b70;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            background: var(--ink);
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #030014;
+            background: var(--ink);
+            color: var(--text);
+            max-width: 480px;
+            margin: 0 auto;
+            overflow-x: hidden;
+            box-shadow: 0 0 80px rgba(0, 0, 0, 0.45);
         }
+
         .font-serif {
             font-family: 'Cormorant Garamond', serif;
         }
+
+        .page-glow {
+            background: radial-gradient(circle at 12% 5%, rgba(238, 120, 146, 0.16), transparent 30%),
+                radial-gradient(circle at 90% 48%, rgba(255, 180, 154, 0.18), transparent 32%),
+                #f8f5f1;
+        }
+
+        body .text-slate-200,
+        body .text-white {
+            color: var(--text);
+        }
+
+        nav .glassmorphism {
+            background: rgba(20, 14, 20, 0.82);
+            border-color: rgba(255, 255, 255, 0.14);
+            box-shadow: 0 12px 30px rgba(20, 14, 20, 0.2);
+            transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+        }
+
+        nav.is-scrolled .glassmorphism {
+            background: rgba(20, 14, 20, 0.94);
+            border-color: rgba(238, 120, 146, 0.3);
+            box-shadow: 0 14px 32px rgba(20, 14, 20, 0.3);
+        }
+
+        nav [data-nav-link] {
+            color: var(--muted);
+            transition: color 0.25s ease;
+        }
+
+        nav [data-nav-link]:hover,
+        nav [data-nav-link].is-active {
+            color: var(--pink);
+        }
+
+        nav [data-nav-link].is-active {
+            text-shadow: 0 0 18px rgba(238, 120, 146, 0.22);
+        }
+
+        nav .text-slate-400,
+        #gallery .text-slate-400,
+        #reasons .text-slate-400,
+        footer {
+            color: var(--muted);
+        }
+
+        nav .text-slate-400 {
+            color: rgba(255, 245, 247, 0.72);
+        }
+
+        #gallery,
+        #reasons {
+            background: rgba(255, 255, 255, 0.34);
+        }
+
+        #reasons .glassmorphism {
+            background: rgba(255, 255, 255, 0.78);
+            border-color: rgba(72, 51, 57, 0.1);
+            box-shadow: 0 18px 40px rgba(90, 58, 65, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.62);
+            border-color: rgba(72, 51, 57, 0.1);
+            box-shadow: 0 10px 28px rgba(90, 58, 65, 0.06);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(238, 120, 146, 0.34);
+            box-shadow: 0 20px 40px rgba(90, 58, 65, 0.14);
+        }
+
+        #reasons .glassmorphism .text-white,
+        #gallery > div:first-child h2,
+        #reasons h2,
+        #reasons .glassmorphism p {
+            color: var(--text);
+        }
+
+        footer {
+            border-color: rgba(72, 51, 57, 0.1);
+        }
+
+        .hero-video {
+            object-position: center center;
+            transform: scale(1.04);
+            filter: saturate(0.82) contrast(1.05);
+            transition: transform 1.2s ease-out;
+        }
+
+        .hero-video.is-ready {
+            transform: scale(1.08);
+        }
+
+        .hero-overlay {
+            background: linear-gradient(180deg, rgba(12, 7, 16, 0.18) 0%, rgba(12, 7, 16, 0.32) 36%, rgba(12, 7, 16, 0.94) 100%);
+        }
+
+        .hero-content {
+            text-shadow: 0 3px 28px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-title {
+            font-size: clamp(3.6rem, 16vw, 5.2rem);
+            line-height: 0.82;
+            letter-spacing: -0.04em;
+        }
+
+        .hero-title span {
+            color: var(--cream);
+            text-shadow: 0 0 30px rgba(255, 180, 154, 0.24);
+        }
+
+        .hero-kicker {
+            color: #ffd8c9;
+            letter-spacing: 0.28em;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (min-width: 481px) {
+            body {
+                width: calc(100% - 48px);
+                max-width: 1280px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 24px;
+                margin-bottom: 24px;
+                position: relative;
+                left: 50%;
+                transform: translateX(-50%);
+                border-radius: 28px;
+                overflow: hidden;
+                box-shadow: 0 0 80px rgba(0, 0, 0, 0.18);
+            }
+
+            nav {
+                width: min(92%, 1100px) !important;
+                max-width: 1100px !important;
+            }
+
+            #hero {
+                min-height: min(860px, 92svh);
+                padding-left: clamp(2rem, 8vw, 7rem);
+                padding-right: clamp(2rem, 8vw, 7rem);
+            }
+
+            .hero-content {
+                max-width: 46rem;
+            }
+
+            .hero-title {
+                font-size: clamp(4.8rem, 9vw, 8rem);
+            }
+
+            #gallery,
+            #reasons {
+                padding-left: clamp(2rem, 6vw, 5rem);
+                padding-right: clamp(2rem, 6vw, 5rem);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
         /* Custom Custom Glassmorphism Utility */
         .glassmorphism {
             background: rgba(255, 255, 255, 0.03);
@@ -38,6 +242,23 @@
             transform: translateY(-4px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.62) !important;
+            border-color: rgba(72, 51, 57, 0.1) !important;
+            box-shadow: 0 10px 28px rgba(90, 58, 65, 0.06);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9) !important;
+            border-color: rgba(238, 120, 146, 0.34) !important;
+            box-shadow: 0 20px 40px rgba(90, 58, 65, 0.14);
+        }
+
+        .hero-content .text-white,
+        .glass-card .text-white {
+            color: #fff !important;
+        }
         /* Smooth Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
@@ -54,7 +275,7 @@
         }
     </style>
 </head>
-<body class="text-slate-200 min-h-screen relative overflow-x-hidden selection:bg-rose-500/30 selection:text-rose-200">
+<body class="page-glow text-slate-200 min-h-screen relative overflow-x-hidden selection:bg-rose-500/30 selection:text-rose-200">
 
     <div class="fixed top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-rose-500/10 to-violet-600/5 blur-[140px] pointer-events-none z-0 animate-pulse" style="animation-duration: 8s;"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-fuchsia-500/10 to-cyan-500/5 blur-[120px] pointer-events-none z-0 animate-pulse" style="animation-duration: 12s;"></div>
@@ -64,32 +285,36 @@
         <div class="glassmorphism rounded-full px-6 py-3 flex items-center justify-between shadow-2xl">
             <a href="#" class="font-serif italic text-xl font-semibold tracking-wide bg-gradient-to-r from-rose-200 via-fuchsia-200 to-indigo-200 bg-clip-text text-transparent">Teenah</a>
             <div class="flex items-center gap-6 text-sm font-medium tracking-wide text-slate-400">
-                <a href="#gallery" class="hover:text-rose-300 transition-colors">Gallery</a>
-                <a href="#reasons" class="hover:text-rose-300 transition-colors">Chapters</a>
-                <a href="#timeline" class="hover:text-rose-300 transition-colors">Timeline</a>
+                <a href="#gallery" data-nav-link="gallery">Gallery</a>
+                <a href="#reasons" data-nav-link="reasons">Chapters</a>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-24 px-4 overflow-hidden z-10">
-        <div class="text-center max-w-4xl mx-auto space-y-8">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs uppercase tracking-[0.2em] text-rose-300/90 backdrop-blur-md animate-fade-in">
-                <span class="w-1.5 h-1.5 rounded-full bg-rose-400 animate-ping"></span>
-                Dedicated to the one who inspires it all
+    <section id="hero" class="relative min-h-[100svh] flex items-end px-6 pb-16 pt-32 overflow-hidden z-10">
+        <video class="hero-video absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="assets/img/image11.jpeg" aria-hidden="true">
+            <source src="Teenah vid.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay absolute inset-0"></div>
+        <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/35 to-transparent"></div>
+
+        <div class="hero-content relative z-10 max-w-sm space-y-6">
+            <div class="hero-kicker inline-flex items-center gap-2 text-[10px] uppercase font-semibold reveal">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-300 animate-pulse"></span>
+                A little world for Teenah
             </div>
             
-            <h1 class="font-serif text-5xl md:text-8xl font-light tracking-tight leading-none text-white">
-                Tracy's Beautiful Moments, <br>
-                <span class="italic font-normal bg-gradient-to-r from-rose-300 via-fuchsia-300 to-indigo-200 bg-clip-text text-transparent">Timeless Grace</span>
+            <h1 class="hero-title font-serif font-light text-white reveal">
+                For <span class="italic font-normal">Teenah.</span>
             </h1>
             
-            <p class="max-w-xl mx-auto text-slate-400 font-light text-base md:text-lg leading-relaxed tracking-wide">
-                A digital sanctuary built to preserve the laughter, the milestones, and the beautiful quiet moments shared along the way.
+            <p class="max-w-xs text-white/75 font-light text-sm leading-relaxed tracking-wide reveal">
+                Every laugh, every milestone, every beautiful quiet moment. Kept here, just for you.
             </p>
             
-            <div class="pt-4">
-                <a href="#gallery" class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white text-slate-950 font-medium text-sm hover:bg-rose-100 transition-all duration-300 shadow-xl group">
-                    Explore the Canvas
+            <div class="pt-2 reveal">
+                <a href="#gallery" class="inline-flex items-center gap-3 px-5 py-3 rounded-full bg-[#fff8f1] text-[#22151b] font-semibold text-xs hover:bg-rose-100 transition-all duration-300 shadow-xl group">
+                    Enter the gallery
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                     </svg>
@@ -97,9 +322,9 @@
             </div>
         </div>
 
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 text-xs tracking-widest uppercase flex flex-col items-center gap-2 opacity-60">
-            Scroll down
-            <div class="w-px h-8 bg-gradient-to-b from-slate-500 to-transparent"></div>
+        <div class="absolute bottom-7 right-6 text-white/50 text-[9px] tracking-[0.28em] uppercase flex items-center gap-3 [writing-mode:vertical-rl]">
+            Scroll to remember
+            <div class="w-px h-8 bg-gradient-to-b from-white/60 to-transparent"></div>
         </div>
     </section>
 
@@ -112,10 +337,40 @@
         </div>
 
         <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 [column-fill:_balance]">
+
+            <div class="break-inside-avoid relative rounded-3xl overflow-hidden glass-card group">
+                <div class="aspect-[3/4] bg-neutral-900 overflow-hidden relative">
+                    <img src="001.JPEG" alt="Teenah at the restaurant" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
+                    <p class="text-xs uppercase text-rose-300 tracking-wider mb-1">Gorgeous restaurant</p>
+                    <h3 class="font-serif text-xl text-white">The room had a view, but Teenah had all the attention.</h3>
+                </div>
+            </div>
+
+            <div class="break-inside-avoid relative rounded-3xl overflow-hidden glass-card group">
+                <div class="aspect-[3/4] bg-neutral-900 overflow-hidden relative">
+                    <img src="002.JPEG" alt="Teenah enjoying an evening at the restaurant" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
+                    <p class="text-xs uppercase text-fuchsia-300 tracking-wider mb-1">Dinner glow</p>
+                    <h3 class="font-serif text-xl text-white">A beautiful evening, made brighter by the one everyone noticed.</h3>
+                </div>
+            </div>
+
+            <div class="break-inside-avoid relative rounded-3xl overflow-hidden glass-card group">
+                <div class="aspect-[3/4] bg-neutral-900 overflow-hidden relative">
+                    <img src="003.JPEG" alt="Teenah at a gorgeous restaurant" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
+                    <p class="text-xs uppercase text-amber-200 tracking-wider mb-1">The main event</p>
+                    <h3 class="font-serif text-xl text-white">The restaurant was gorgeous. Teenah was unforgettable.</h3>
+                </div>
+            </div>
             
             <div class="break-inside-avoid relative rounded-3xl overflow-hidden glass-card group">
                 <div class="aspect-[4/5] bg-neutral-900 overflow-hidden relative">
-                    <img src="image0.jpeg" alt="Moment" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <img src="assets/img/image0.jpeg" alt="Moment" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700 ease-out">
                 </div>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
                     <p class="text-xs uppercase text-rose-300 tracking-wider mb-1">Sunday Afternoon</p>
@@ -281,7 +536,7 @@
 
             <div x-data="{ 
                 activeCard: 1, 
-                totalCards: 5,
+                totalCards: 8,
                 next() { this.activeCard = this.activeCard === this.totalCards ? 1 : this.activeCard + 1 },
                 prev() { this.activeCard = this.activeCard === 1 ? this.totalCards : this.activeCard - 1 }
             }" class="relative h-[400px] flex flex-col justify-between items-center">
@@ -344,7 +599,7 @@
                         <div class="text-xs text-slate-500 tracking-wider">04 / 05</div>
                     </div>
 
-                      <div x-show="activeCard === 5" 
+                    <div x-show="activeCard === 5" 
                          x-transition:enter="transition ease-out duration-500 transform"
                          x-transition:enter-start="opacity-0 scale-95 translate-y-4"
                          x-transition:enter-end="opacity-100 scale-100 translate-y-0"
@@ -356,6 +611,48 @@
                             </p>
                         </div>
                         <div class="text-xs text-slate-500 tracking-wider">05 / 05</div>
+                    </div>
+
+                    <div x-show="activeCard === 6" 
+                         x-transition:enter="transition ease-out duration-500 transform"
+                         x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         class="absolute inset-0 glassmorphism p-8 rounded-3xl flex flex-col justify-between shadow-2xl">
+                        <div class="space-y-4">
+                            <span class="font-serif text-xs uppercase tracking-widest text-rose-300">Chapter VI • Joy</span>
+                            <p class="font-serif text-2xl text-white leading-relaxed italic">
+                                "You make ordinary moments feel special, simply by bringing your whole, beautiful self into them."
+                            </p>
+                        </div>
+                        <div class="text-xs text-slate-500 tracking-wider">06 / 08</div>
+                    </div>
+
+                    <div x-show="activeCard === 7" 
+                         x-transition:enter="transition ease-out duration-500 transform"
+                         x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         class="absolute inset-0 glassmorphism p-8 rounded-3xl flex flex-col justify-between shadow-2xl">
+                        <div class="space-y-4">
+                            <span class="font-serif text-xs uppercase tracking-widest text-fuchsia-300">Chapter VII • Becoming</span>
+                            <p class="font-serif text-2xl text-white leading-relaxed italic">
+                                "Every season of your life reveals another layer of your strength, and it is beautiful to watch you become."
+                            </p>
+                        </div>
+                        <div class="text-xs text-slate-500 tracking-wider">07 / 08</div>
+                    </div>
+
+                    <div x-show="activeCard === 8" 
+                         x-transition:enter="transition ease-out duration-500 transform"
+                         x-transition:enter-start="opacity-0 scale-95 translate-y-4"
+                         x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                         class="absolute inset-0 glassmorphism p-8 rounded-3xl flex flex-col justify-between shadow-2xl">
+                        <div class="space-y-4">
+                            <span class="font-serif text-xs uppercase tracking-widest text-amber-200">Chapter VIII • Pride</span>
+                            <p class="font-serif text-2xl text-white leading-relaxed italic">
+                                "I am so proud of you, Teenah. Proud of your heart, your courage, your growth, and the woman you continue to become."
+                            </p>
+                        </div>
+                        <div class="text-xs text-slate-500 tracking-wider">08 / 08</div>
                     </div>
 
                 </div>
@@ -381,12 +678,9 @@
         <p>© 2026 Crafted with Infinite Appreciation. I LOVE YOU</p>
     </footer>
 
-  <div x-data="{ 
-        playing: false, 
-        trackTitle: 'Falling in Love', 
-        artist: 'Freeman HKD ft. Atenda Chinx',
+    <div x-data="{ 
+        playing: false,
         init() {
-            // Reference the audio element using Alpine's $refs
             this.$watch('playing', value => {
                 if (value) {
                     this.$refs.audioStream.play();
@@ -395,29 +689,74 @@
                 }
             });
         }
-     }" 
-     class="fixed bottom-6 right-6 z-50 glassmorphism rounded-2xl p-4 flex items-center gap-4 shadow-2xl max-w-xs transition-all duration-300 hover:border-white/20">
-    
-    <audio x-ref="audioStream" src="Freeman HKD - Falling in Love ft Atenda Chinx [Official Music Video] [FFQBGz2L8bs].mp3" loop prefetch="auto"></audio>
+     }" class="fixed bottom-5 right-5 z-50">
+    <audio x-ref="audioStream" src="Bruno Mars - Rest of my life.mp3" loop preload="auto"></audio>
 
-    <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-rose-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/20 mix-blend-overlay"></div>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-             class="w-5 h-5 text-white/80" :class="playing ? 'animate-spin' : 'animate-pulse'" style="animation-duration: 3s;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l6-6.364M12 21a9 9 0 110-18 9 9 0 010 18zm0 0v-7.5" />
+    <button @click="playing = !playing" :aria-label="playing ? 'Pause music' : 'Play music'" class="w-11 h-11 rounded-full bg-[#20161d] border border-white/20 text-white flex items-center justify-center shadow-xl hover:scale-105 hover:border-rose-300/70 transition-all duration-300 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" class="w-5 h-5" :class="playing ? 'text-rose-300 animate-pulse' : 'text-white/90'">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 18V5.25a.75.75 0 011.06-.68l8.19 3.64a.75.75 0 010 1.37l-8.19 3.64A.75.75 0 019 12.54V18zm0 0a2.25 2.25 0 104.5 0A2.25 2.25 0 009 18z" />
         </svg>
-    </div>
-
-    <div class="flex-1 pr-2">
-        <h4 class="text-xs font-semibold text-white truncate max-w-[140px]" x-text="trackTitle"></h4>
-        <p class="text-[9px] text-slate-400 truncate max-w-[140px] mt-0.5" x-text="artist"></p>
-    </div>
-
-    <button @click="playing = !playing" class="w-8 h-8 rounded-full bg-white text-slate-950 flex items-center justify-center shadow hover:scale-105 transition-transform focus:outline-none">
-        <svg x-show="!playing" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-3.5 h-3.5 ml-0.5"><path d="M8 5v14l11-7z" /></svg>
-        <svg x-show="playing" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-3.5 h-3.5"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" /></svg>
     </button>
 </div>
+
+<script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hero = document.querySelector('#hero');
+    const heroVideo = document.querySelector('.hero-video');
+    const nav = document.querySelector('nav');
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    const revealItems = document.querySelectorAll('.reveal, .glass-card');
+
+    const updateNavigation = () => {
+        const scrollPosition = window.scrollY;
+        nav?.classList.toggle('is-scrolled', scrollPosition > 32);
+
+        navLinks.forEach(link => {
+            const section = document.querySelector(`#${link.dataset.navLink}`);
+            const isActive = section && scrollPosition + 140 >= section.offsetTop &&
+                scrollPosition + 140 < section.offsetTop + section.offsetHeight;
+            link.classList.toggle('is-active', Boolean(isActive));
+        });
+    };
+
+    updateNavigation();
+    window.addEventListener('scroll', updateNavigation, { passive: true });
+
+    if (!prefersReducedMotion) {
+        revealItems.forEach((item, index) => {
+            item.classList.add('reveal');
+            item.style.transitionDelay = `${Math.min(index * 45, 320)}ms`;
+        });
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealItems.forEach(item => revealObserver.observe(item));
+
+        window.addEventListener('scroll', () => {
+            if (!hero || !heroVideo) return;
+            const offset = Math.min(window.scrollY * 0.08, 26);
+            heroVideo.style.transform = `scale(1.08) translateY(${offset}px)`;
+        }, { passive: true });
+    } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+    }
+
+    heroVideo?.addEventListener('loadeddata', () => heroVideo.classList.add('is-ready'), { once: true });
+    heroVideo?.addEventListener('ended', () => heroVideo.play().catch(() => {}));
+    if (heroVideo) heroVideo.loop = true;
+    heroVideo?.play().catch(() => {});
+
+    window.setTimeout(() => {
+        document.querySelectorAll('#hero .reveal').forEach(item => item.classList.add('is-visible'));
+    }, 180);
+</script>
 
 </body>
 </html>
